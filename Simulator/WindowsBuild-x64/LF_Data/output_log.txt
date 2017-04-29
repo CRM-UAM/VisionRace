@@ -7,24 +7,21 @@ Direct3D:
     VRAM:     1475 MB
     Driver:   22.21.13.8165
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
-Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.087 seconds
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\LineFollow-Unity\Line-Follow\WindowsBuild\LF_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.026 seconds
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\eugen_000\OneDrive - Universidad Autonoma de Madrid\OpenCV\Repo\Simulator\WindowsBuild-x64\LF_Data\Managed\System.dll (this message is harmless)
 desktop: 1280x1024 60Hz; virtual: 1280x1024 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.255137 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1c1c -> priority: 1 
-  Thread -> id: 8f0 -> priority: 1 
+UnloadTime: 1.068889 ms

@@ -11,7 +11,7 @@ from ImageProcessing import ImProcess
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('192.168.1.134', 8001) # CHANGE THIS ARGUMENTS
+server_address = ('localhost', 8001) # CHANGE THIS ARGUMENTS
 sock.bind(server_address)
 
 # Listen for incoming connections
