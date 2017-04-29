@@ -11,8 +11,7 @@ from ImageProcessing import ImProcess
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-#server_address = ('localhost', 8001)
-server_address = ('192.168.1.134', 8001)
+server_address = ('192.168.1.134', 8001) # CHANGE THIS ARGUMENTS
 sock.bind(server_address)
 
 # Listen for incoming connections
@@ -27,12 +26,12 @@ while True:
             data = connection.recv(50000)
 
             if data:
-                array = np.frombuffer(data, dtype='uint8')
-                img = cv2.imdecode(array, 1)
+                array = np.frombuffer(data, dtype='uint8') #Read the buffer from the TCP connection
+                img = cv2.imdecode(array, 1) # Decode the image to fit the OpenCV model
                 if img is not None:
-                    fm, d = ImProcess(img)
-                    cv2.imshow("window", fm)
-                    connection.sendall( bytes(str(d).encode('utf8')) )
+                    fm, d = ImProcess(img) #Call the function from ImageProcessing
+                    cv2.imshow("window", fm) # Show visual debug (Comment this line for performance increase)
+                    connection.sendall( bytes(str(d).encode('utf8')) ) #Send back to simulator the direction integer
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
             else:
