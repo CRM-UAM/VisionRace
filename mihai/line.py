@@ -23,7 +23,7 @@ vidFile = cv2.VideoCapture(filename)
 lateral_search = 20
 start_height = 719
 start_left_margin = 100 # ignore the first 100 pixels
-
+step = 1 
 while True:
     time_1 = time.clock()
     succesfully_read, image = vidFile.read()
@@ -43,9 +43,9 @@ while True:
 
             #Left side
             last_x = points[0][0] + start_left_margin
-            for altura in range(start_height - 1, 0, -1):
-                if(thresh[altura][last_x] == 255):
-                    end_limit = last_x + lateral_search
+            for altura in range(start_height - 1, 0, -step):
+                if(thresh[altura][last_x] == 255): # if the pixel is while it means the line turned right
+                    end_limit = last_x + lateral_search  # so we only search right
                     if (end_limit) > 1280:
                         end_limit = 1279
                     for num in range(last_x, end_limit, 1):
@@ -55,7 +55,7 @@ while True:
                             break
                     else:
                         break
-                elif(thresh[altura][last_x] == 0):
+                elif(thresh[altura][last_x] == 0): # if the pixel is black, the line turned left so we only search left
                     end_limit = last_x - lateral_search
                     if (end_limit) < 0:
                         end_limit = 0
@@ -71,9 +71,9 @@ while True:
             #right side
             if(len(points[0]) > 1):
                 last_x = points[0][1] + start_left_margin
-                for altura in range(start_height - 1, 0, -1):
-                    if(thresh[altura][last_x] == 255):
-                        end_limit = last_x - lateral_search
+                for altura in range(start_height - 1, 0, -step):
+                    if(thresh[altura][last_x] == 255): # if the pixel is white search left
+                        end_limit = last_x - lateral_search 
                         if (end_limit) < 0:
                             end_limit = 0
                         for num in range(last_x, end_limit, -1):
@@ -83,7 +83,7 @@ while True:
                                 break
                         else:
                             break
-                    elif(thresh[altura][last_x] == 0):
+                    elif(thresh[altura][last_x] == 0): # if the pixel is black search right
                         end_limit = last_x + lateral_search
                         if (end_limit) > 1280:
                             end_limit = 1279
