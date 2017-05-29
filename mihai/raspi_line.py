@@ -52,11 +52,11 @@ while True:
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_GRAY2RGB) # Drawing color points requires RGB image
     start_time = time.clock()
 
-    ret, thresh = cv2.threshold(imgray, 100, 255, cv2.THRESH_BINARY)
+    ret, thresh = cv2.threshold(frame, 100, 255, cv2.THRESH_BINARY)
     signed_thresh = thresh[start_height].astype(np.int16)
     diff = np.diff(signed_thresh)   #The derivative of the start_height line
     diff = diff[start_left_margin:] # ignore the first 100 values of the derivative
-
+    point_list = []
     points = np.where(np.logical_or(diff > 200, diff < -200)) #maximums and minimums of derivative
 
     if len(points[0]) > 0:
