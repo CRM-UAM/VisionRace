@@ -23,7 +23,7 @@ vidFile = cv2.VideoCapture(filename)
 lateral_search = 20
 start_height = 719
 start_left_margin = 100 # ignore the first 100 pixels
-step = 1 
+step = 3
 while True:
     time_1 = time.clock()
     succesfully_read, image = vidFile.read()
@@ -39,61 +39,52 @@ while True:
 
         if len(points[0]) > 0:
             for num in points[0]:
-                cv2.circle(t_img, (num + start_left_margin, start_height), 2, (255,0,0), -1)
+                cv2.circle(t_img, (num + start_left_margin, start_height), 2, (0,0,255), -1)
 
             #Left side
             last_x = points[0][0] + start_left_margin
             for altura in range(start_height - 1, 0, -step):
                 if(thresh[altura][last_x] == 255): # if the pixel is while it means the line turned right
                     end_limit = last_x + lateral_search  # so we only search right
-                    if (end_limit) > 1280:
-                        end_limit = 1279
-                    for num in range(last_x, end_limit, 1):
-                        if thresh[altura][num] == 0:
-                            point_list.append((num, altura))
-                            last_x = num
-                            break
-                    else:
-                        break
-                elif(thresh[altura][last_x] == 0): # if the pixel is black, the line turned left so we only search left
-                    end_limit = last_x - lateral_search
-                    if (end_limit) < 0:
-                        end_limit = 0
 
-                    for num in range(last_x, end_limit, -1):
-                        if thresh[altura][num] == 255:
-                            point_list.append((num, altura))
-                            last_x = num
-                            break
-                    else:
-                        break
+                    try:
+                        index = np.where(thresh[altura][last_x:end_limit] == 0)[0][0] + last_x
+                        point_list.append((index, altura))
+                        last_x = index
+                    except IndexError:
+                        break;
+
+                else: # if the pixel is black, the line turned left so we only search left
+                    end_limit = last_x - lateral_search
+
+                    try:
+                        index = np.where(thresh[altura][end_limit:last_x] == 255)[0][-1] + end_limit
+                        point_list.append((index, altura))
+                        last_x = index
+                    except IndexError:
+                        break;
 
             #right side
             if(len(points[0]) > 1):
                 last_x = points[0][1] + start_left_margin
                 for altura in range(start_height - 1, 0, -step):
                     if(thresh[altura][last_x] == 255): # if the pixel is white search left
-                        end_limit = last_x - lateral_search 
-                        if (end_limit) < 0:
-                            end_limit = 0
-                        for num in range(last_x, end_limit, -1):
-                            if thresh[altura][num] == 0:
-                                point_list.append((num, altura))
-                                last_x = num
-                                break
-                        else:
-                            break
-                    elif(thresh[altura][last_x] == 0): # if the pixel is black search right
+                        end_limit = last_x - lateral_search
+                        try:
+                            index = np.where(thresh[altura][end_limit:last_x] == 0)[0][-1] + end_limit
+                            point_list.append((index, altura))
+                            last_x = index
+                        except IndexError:
+                            break;
+
+                    else: # if the pixel is black search right
                         end_limit = last_x + lateral_search
-                        if (end_limit) > 1280:
-                            end_limit = 1279
-                        for num in range(last_x, end_limit, 1):
-                            if thresh[altura][num] == 255:
-                                point_list.append((num, altura))
-                                last_x = num
-                                break
-                        else:
-                            break
+                        try:
+                            index = np.where(thresh[altura][last_x:end_limit] == 255)[0][0] + last_x
+                            point_list.append((index, altura))
+                            last_x = index
+                        except IndexError:
+                            break;
 
         print(str((time.clock()- time_1) * 1000), 'ms')
 
