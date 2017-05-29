@@ -3,7 +3,7 @@
 #run this script like a bash script
 # ./line.py
 #This way python3 interpreter is always used(if installed)
-#test
+
 import numpy as np
 import sys
 import cv2
@@ -17,8 +17,6 @@ else:
     exit(1)
 
 vidFile = cv2.VideoCapture(filename)
-
-#retval, image = cv2.imread('first_test.jpg')
 
 lateral_search = 20
 start_height = 719
