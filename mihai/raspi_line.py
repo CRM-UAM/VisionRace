@@ -49,9 +49,9 @@ while True:
         print("Error: Camera stream closed unexpectedly")
         break
     frame.shape = (h,w) # set the correct dimensions for the numpy array
-
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_GRAY2RGB) # Drawing color points requires RGB image
     start_time = time.clock()
-    
+
     ret, thresh = cv2.threshold(imgray, 100, 255, cv2.THRESH_BINARY)
     signed_thresh = thresh[start_height].astype(np.int16)
     diff = np.diff(signed_thresh)   #The derivative of the start_height line
@@ -61,7 +61,7 @@ while True:
 
     if len(points[0]) > 0:
         for num in points[0]:
-            cv2.circle(t_img, (num + start_left_margin, start_height), 2, (0,0,255), -1)
+            cv2.circle(frame_rgb, (num + start_left_margin, start_height), 2, (0,0,255), -1)
 
         #Left side
         last_x = points[0][0] + start_left_margin
@@ -111,7 +111,7 @@ while True:
 
     #draw all points in the list
     for point in point_list:
-        cv2.circle(frame, point, 2, (255,0,0), -1)
+        cv2.circle(frame_rgb, point, 2, (255,0,0), -1)
 
     #show the frame
     cv2.imshow("Display Window", frame)
