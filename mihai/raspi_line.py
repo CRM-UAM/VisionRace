@@ -114,7 +114,7 @@ while True:
         cv2.circle(frame_rgb, point, 2, (255,0,0), -1)
 
     #show the frame
-    cv2.imshow("Display Window", frame)
+    cv2.imshow("Display Window", frame_rgb)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
