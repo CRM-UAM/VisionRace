@@ -108,7 +108,7 @@ while True:
                     except IndexError:
                         break;
     print("Loop took:", str((time.clock()- start_time) * 1000), 'ms')
-    print("Points:", len(point_list));
+    print("Points:", len(point_list))
     #draw all points in the list
     for point in point_list:
         cv2.circle(frame_rgb, point, 2, (255,0,0), -1)
