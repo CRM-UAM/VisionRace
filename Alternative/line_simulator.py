@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 import time
 import socket
+import itertools
 
 lateral_search = 20 # number of pixels to search the line border
 start_left_margin = 100 # ignore the first 100 pixels
@@ -93,12 +94,10 @@ while True:
         print("Loop took:", str((time.clock()- start_time) * 1000), 'ms')
 
 
-        #draw all points in the list
-        for point in left_list:
-            cv2.circle(thresh_rgb, point, 2, (0,0,255 ), -1)
-
-        for point in right_list:
-            cv2.circle(thresh_rgb, point, 2, (0,0,255 ), -1)
+        for left, right in zip(left_list, right_list):
+            cv2.circle(thresh_rgb, (int((left[0] + right[0]) / 2), left[1]), 2, (0,255,0), -1)
+            cv2.circle(thresh_rgb, left, 2, (0,0,255 ), -1)
+            cv2.circle(thresh_rgb, right, 2, (0,0,255 ), -1)
 
         conn.sendall( bytes(str(0).encode('utf8')) )
         cv2.imshow("Display Window", thresh_rgb)
