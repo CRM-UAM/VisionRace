@@ -74,7 +74,7 @@ def SetSpeed():
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print "Socket ceated"
 
-server_address = ('0.0.0.0', 55546)
+server_address = ('0.0.0.0', 9123)
 sock.bind(server_address)
 
 sock.listen(1)
