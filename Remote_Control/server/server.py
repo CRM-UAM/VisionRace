@@ -11,6 +11,7 @@ MAX_SPEED_FORWARD = 80
 MAX_SPEED_REVERSE = 50
 MAX_STEERING = 100
 STEERING_SPEED = 50
+STEERING_AUTOCENTER = 80
 ACCELERATION = 25
 NEGATIVE_ACCELERATION = 30
 NO_THROTTLE_ACCELERATION = 15
@@ -59,14 +60,19 @@ def SetSpeed():
 				speed += NO_THROTTLE_ACCELERATION * delta_time
 
 		# Control de la direccion
-		sign = 0
-		try:
-			sign = int(data[3]) - int (data[1])
-		except ValueError:
-			pass
+		if data[1] == "1":
+			if steering_angle > -MAX_STEERING:
+				steering_angle -= STEERING_SPEED * delta_time
+		elif data[3] != "1":
+			if steering_angle > 0:
+				steering_angle += STEERING_AUTOCENTER * delta_time
 
-		if(abs(steering_angle) < MAX_STEERING):
-			steering_angle += STEERING_SPEED * delta_time * sign
+		if data[3] == "1":
+			if steering_angle < MAX_STEERING:
+				steering_angle += STEERING_SPEED * delta_time
+		elif data[1] != "1":
+			if steering_angle < 0:
+				steering_angle -= STEERING_AUTOCENTER * delta_time
 
 		ChangeMotorsState()
 
