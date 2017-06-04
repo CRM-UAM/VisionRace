@@ -18,10 +18,12 @@ def connect_to_server(client, port = default_port):
     create_socket()
     try:
         sock.connect((client, port))
-        os.system('xset r off')
+        if os.name == 'posix':
+            os.system('xset r off')
         return "Connected"
     except socket_error as exc:
-        os.system('xset r on')
+        if os.name == 'posix':
+            os.system('xset r on')
         return "%s" % exc
 
 def disconnect_from_server():
@@ -49,7 +51,8 @@ def on_exit():
     global Connected
     if Connected:
         disconnect_from_server()
-    os.system('xset r on')
+    if os.name == 'posix':
+        os.system('xset r on')
     root.quit()
 
 atexit.register(on_exit)
