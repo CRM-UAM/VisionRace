@@ -68,7 +68,7 @@ def SetSpeed():
 		if(abs(steering_angle) < MAX_STEERING):
 			steering_angle += STEERING_SPEED * delta_time * sign
 
-		ChangeMotorsState
+		ChangeMotorsState()
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
