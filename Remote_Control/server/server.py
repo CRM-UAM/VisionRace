@@ -60,19 +60,22 @@ def SetSpeed():
 				speed += NO_THROTTLE_ACCELERATION * delta_time
 
 		# Control de la direccion
+		try:
+			sign = int(data[3]) - int(data[1])
+		except ValueError:
+			pass
+		if sign == 0:
+			if steering_angle < 0:
+				steering_angle += STEERING_AUTOCENTER * delta_time * 2
+			else:
+				steering_angle -= STEERING_AUTOCENTER * delta_time * 2
+
 		if data[1] == "1":
 			if steering_angle > -MAX_STEERING:
 				steering_angle -= STEERING_SPEED * delta_time
-		elif data[3] != "1":
-			if steering_angle > 0:
-				steering_angle += STEERING_AUTOCENTER * delta_time
-
-		if data[3] == "1":
+		elif data[3] == "1":
 			if steering_angle < MAX_STEERING:
 				steering_angle += STEERING_SPEED * delta_time
-		elif data[1] != "1":
-			if steering_angle < 0:
-				steering_angle -= STEERING_AUTOCENTER * delta_time
 
 		ChangeMotorsState()
 
@@ -88,7 +91,7 @@ print "Waiting for client to connect"
 
 connection, client_address = sock.accept()
 print "Connected from {}".format(client_address)
-thread.start_new_thread(SetSpeed, ())
+t = thread.start_new_thread(SetSpeed, ())
 MotorsSetup()
 
 while True:
