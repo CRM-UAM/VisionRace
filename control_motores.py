@@ -20,7 +20,7 @@ L_MOTOR = GPIO.PWM(L_PWM_PIN, 1000)
 R_MOTOR = GPIO.PWM(R_PWM_PIN, 1000)
 
 def MotorsSetup():
-	L_MOTOR.start(0)	
+	L_MOTOR.start(0)
 	R_MOTOR.start(0)
 
 def L_Speed(speed):
@@ -33,7 +33,7 @@ def L_Speed(speed):
     if speed > 100:
         speed = 100
     elif speed < -100:
-	speed = -100
+        speed = -100
 
     L_MOTOR.ChangeDutyCycle(speed)
 
@@ -47,7 +47,7 @@ def R_Speed(speed):
     if speed > 100:
         speed = 100
     elif speed < -100:
-	speed = -100
+	    speed = -100
 
     R_MOTOR.ChangeDutyCycle(speed)
 
@@ -69,22 +69,3 @@ def MotorsStop():
 	L_MOTOR.stop()
 	R_MOTOR.stop()
 	GPIO.cleanup()
-
-
-"""
-for x in xrange(0,100, 5):
-    L_MOTOR.ChangeDutyCycle(x)
-    R_MOTOR.ChangeDutyCycle(x)
-    time.sleep(1)
-"""
-
-#L_Speed(SPEED)
-#R_Speed(SPEED)
-
-#Direction(-2)
-#Direction(-5)
-
-#x = input("Speed ")
-#y = input("Sense ")
-
-#Speed(L_MOTOR, int(x), int(y))
