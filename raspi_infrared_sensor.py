@@ -4,7 +4,7 @@
 # ./line.py
 #This way python3 interpreter is always used(if installed)
 
-#import cv2
+import cv2
 import numpy as np
 import subprocess as sp
 import time
@@ -67,10 +67,11 @@ while True:
 
     start_time = time.clock()
 
-    #frame_rgb = cv2.cvtColor(frame, cv2.COLOR_GRAY2RGB) # Drawing color points requires RGB image
-    #ret, thresh = cv2.threshold(frame, 105, 255, cv2.THRESH_BINARY)
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_GRAY2RGB) # Drawing color points requires RGB image
+    ret, thresh = cv2.threshold(frame, 105, 255, cv2.THRESH_BINARY)
     #ret, thresh = cv2.threshold(frame, cv2.getTrackbarPos('Thresh','Thresh Window'), 255, cv2.THRESH_BINARY)
 
+    #thresh = (frame < 105) * frame
     signed_thresh = thresh[start_height].astype(np.int16)
     diff = np.diff(signed_thresh)   #The derivative of the start_height line
     #diff = diff[start_left_margin:] # ignore the first 100 values of the derivative
@@ -79,25 +80,30 @@ while True:
     #if len(points[0])>1 and diff[points[0][0]] == 255:
         #points = np.delete(points, 0)
 
-    #cv2.line(frame_rgb,(0,start_height),(640,start_height),(0,255,0),1)
+    cv2.line(frame_rgb,(0,start_height),(640,start_height),(0,255,0),1)
     #print(points)
     if len(points) > 0 and len(points[0]) > 1:
         if GetSpeed() == 0:
             BaseSpeed(Speed)
         middle = (points[0][0] + points[0][1]) / 2
-        #cv2.circle(frame_rgb, (points[0][0], start_height), 2, (255,0,0), -1)
-        #cv2.circle(frame_rgb, (points[0][1], start_height), 2, (255,0,0), -1)
-        #cv2.circle(frame_rgb, (middle, start_height), 2, (0,0,255), -1)
+        cv2.circle(frame_rgb, (points[0][0], start_height), 2, (255,0,0), -1)
+        cv2.circle(frame_rgb, (points[0][1], start_height), 2, (255,0,0), -1)
+        cv2.circle(frame_rgb, (middle, start_height), 2, (0,0,255), -1)
         print(int((middle-320)/int(sys.argv[1])))
         Direction(int((middle - 320)/float(sys.argv[1])))
     else:
+	Speed -= 1
+	if Speed <= 0:
+		break
+	BaseSpeed(Speed)
         start_height -= 5
+	start_height = start_height % h
         no_points_count += 1
 
     print("Loop took:", str((time.clock()- start_time) * 1000), 'ms')
 
     frames.append(frame_rgb)
-    #frames.append(thresh)	
+    frames.append(thresh)	
     if len(frames) == 26:
         del frames[0]
 
@@ -108,18 +114,19 @@ while True:
     #show the frame
     #cv2.imshow("Display Window", frame_rgb)
     #cv2.imshow("Thresh Window", thresh)
-    #if cv2.waitKey(1) & 0xFF == ord('q'):
-    #    break
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 cameraProcess.terminate() # stop the camera
 #cv2.destroyAllWindows()
 MotorsStop()
 
-#print("Writing frames to disk...")
-#out = cv2.VideoWriter("drive_test.avi", cv2.cv.CV_FOURCC(*"MJPG"), 30, (w,h))
-#for n in xrange(len(frames)):
+print("Writing frames to disk...")
+out = cv2.VideoWriter("drive_test.avi", cv2.cv.CV_FOURCC(*"MJPG"), 30, (w,h))
+for n in xrange(len(frames)):
     #cv2.imwrite("frame"+str(n)+".png", frames[n]) # save frame as a PNG image
     #thresh_rgb = cv2.cvtColor(frames[n],cv2.COLOR_GRAY2RGB) # video codec requires RGB image
-    #out.write(frames[n])
+    out.write(frames[n])
     #out.write(thresh_rgb)
-#out.release()
+out.release()
+
