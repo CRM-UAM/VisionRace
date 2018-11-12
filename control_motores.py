@@ -24,7 +24,7 @@ def MotorsSetup():
 	R_MOTOR.start(0)
 
 def L_Speed(speed):
-    if speed < 0:
+    if speed <= 0:
         GPIO.output(L_DIR_PIN, GPIO.HIGH)
     else:
         GPIO.output(L_DIR_PIN, GPIO.LOW)
@@ -32,13 +32,11 @@ def L_Speed(speed):
     speed = abs(speed)
     if speed > 100:
         speed = 100
-    elif speed < -100:
-        speed = -100
 
     L_MOTOR.ChangeDutyCycle(speed)
 
 def R_Speed(speed):
-    if speed < 0:
+    if speed <= 0:
         GPIO.output(R_DIR_PIN, GPIO.LOW)
     else:
         GPIO.output(R_DIR_PIN, GPIO.HIGH)
@@ -46,12 +44,11 @@ def R_Speed(speed):
     speed = abs(speed)
     if speed > 100:
         speed = 100
-    elif speed < -100:
-	    speed = -100
 
     R_MOTOR.ChangeDutyCycle(speed)
 
 def Direction(difference):
+    difference /= 2
 	L_Speed(SPEED+difference)
 	R_Speed(SPEED-difference)
 
